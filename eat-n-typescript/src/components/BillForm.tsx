@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { BillFormProps } from "../types";
 
-const BillForm = ({ name, id, splitHandler, selected, setSelected }) => {
+const BillForm = ({
+  name,
+  splitHandler,
+  selected,
+  setSelected,
+  id,
+}: BillFormProps) => {
   const [billValue, setBillValue] = useState("");
-  const [myValue, setMyValue] = useState(0);
+  const [myValue, setMyValue] = useState("");
 
-  const friendsBill = Number(billValue) - myValue;
+  const friendsBill = Number(billValue) - Number(myValue);
   const myBill = Number(billValue) - friendsBill;
-  // console.log(friendsBill);
-  // console.log(selected == "You");
-  // console.log(selected);
+
   return (
     <div>
       <form className="form-split-bill">
@@ -20,11 +25,16 @@ const BillForm = ({ name, id, splitHandler, selected, setSelected }) => {
           type="number"
         />
         <label>Your expense</label>
-        <input onChange={(e) => setMyValue(e.target.value)} type="number" />
+        <input
+          onChange={(e) => setMyValue(e.target.value)} // Changed <MouseEvent> to (e)
+          value={myValue} // Added a value attribute to this input
+          type="number"
+        />
         <label>{name} expense</label>
         <input value={friendsBill} disabled type="text" />
-        <label>Who is payin the bill</label>
-        <select onChange={(e) => setSelected(e.target.value)} name="" id="">
+        <label>Who is paying the bill</label>
+        <select onChange={(e) => setSelected(e.target.value)} value={selected}>
+          {/* Added value attribute */}
           <option value="You">You</option>
           <option value={name}>{name}</option>
         </select>

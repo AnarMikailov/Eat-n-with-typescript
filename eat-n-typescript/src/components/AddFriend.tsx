@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-
-const AddFriend = ({ setAddFriend, friends, setFriends }) => {
+type addFriendProps = {
+  setAddFriend: (a: boolean) => void;
+  friends: any[];
+  setFriends: (newFriends: any[]) => void;
+};
+const AddFriend = ({ setAddFriend, friends, setFriends }: addFriendProps) => {
   const [friendName, setFriendName] = useState("");
   const [url, setUrl] = useState("");
 
